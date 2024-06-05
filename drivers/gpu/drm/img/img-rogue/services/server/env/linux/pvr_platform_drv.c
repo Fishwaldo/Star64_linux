@@ -150,6 +150,8 @@ static int pvr_devices_register(void)
 
 static void pvr_devices_unregister(void)
 {
+/* disabled because above is also commented out! */
+#if 0
 #if defined(MODULE) && !defined(PVR_LDM_PLATFORM_PRE_REGISTERED)
 	unsigned int i;
 
@@ -161,6 +163,7 @@ static void pvr_devices_unregister(void)
 	kfree(pvr_devices);
 	pvr_devices = NULL;
 #endif /* defined(MODULE) && !defined(PVR_LDM_PLATFORM_PRE_REGISTERED) */
+#endif
 }
 
 static int pvr_probe(struct platform_device *pdev)
