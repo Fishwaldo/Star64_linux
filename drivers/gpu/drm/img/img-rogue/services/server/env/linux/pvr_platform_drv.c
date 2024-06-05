@@ -77,8 +77,10 @@ static struct drm_driver pvr_drm_platform_driver;
  */
 #define MAX_DEVICES 16
 
+#if 0
 static unsigned int pvr_num_devices = 1;
 static struct platform_device **pvr_devices;
+#endif
 
 #if defined(NO_HARDWARE)
 static int pvr_num_devices_set(const char *val,
