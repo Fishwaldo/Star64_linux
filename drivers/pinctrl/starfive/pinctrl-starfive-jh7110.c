@@ -975,7 +975,17 @@ int jh7110_pinctrl_probe(struct platform_device *pdev)
 
 	dev_info(dev, "StarFive GPIO chip registered %d GPIOs\n", sfp->gc.ngpio);
 
-	return pinctrl_enable(sfp->pctl);
+	ret = pinctrl_enable(sfp->pctl);
+
+	/* nasty hack to fake USB overcurrent protection */
+	if (dev->of_node && strcmp(dev->of_node->full_name, "pinctrl@13040000") == 0) {
+		u32 value = readl(sfp->base + 0x80); 
+		value &= ~(0x7f << 16);
+		value |= BIT(16);
+		writel(value, sfp->base + 0x80);
+		dev_info(dev, "USB overcurrent protection workaround enabled %d\n", value);
+	}
+	return ret;
 }
 EXPORT_SYMBOL_GPL(jh7110_pinctrl_probe);
 

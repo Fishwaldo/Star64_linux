@@ -76,7 +76,7 @@
 			color = <LED_COLOR_ID_GREEN>;
 			function = LED_FUNCTION_HEARTBEAT;
 			linux,default-trigger = "heartbeat";
-			label = "ack";
+			label = "status";
 		};
 	};
 
@@ -263,7 +263,7 @@
 	pinctrl-0 = <&i2c2_pins>;
 	status = "okay";
 
-	seeed_plane_i2c@45 {
+	seeed_plane_i2c: seeed_plane_i2c@45 {
 		compatible = "seeed_panel";
 		reg = <0x45>;
 
@@ -279,14 +279,14 @@
 		reg = <0x38>;
 	};
 
-	touchscreen@14 {
+	touchscreen: touchscreen@14 {
 		compatible = "goodix,gt911";
 		reg = <0x14>;
 		irq-gpios = <&sysgpio 30 GPIO_ACTIVE_HIGH>;
 		reset-gpios = <&sysgpio 31 GPIO_ACTIVE_HIGH>;
 	};
 
-	panel_radxa@19 {
+	panel_radxa: panel_radxa@19 {
 		compatible ="starfive_jadard";
 		reg = <0x19>;
 		reset-gpio = <&sysgpio 23 0>;
